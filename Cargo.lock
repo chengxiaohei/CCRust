@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "CCRust"
+name = "ccrust"
 version = "0.1.0"

@@ -1,16 +1,12 @@
-mod cpu;
-mod cache;
-mod memory;
+pub mod memory2;
 
-use crate::cache::Cache1;
-use crate::memory::Memory;
+use crate::memory2::{Endian, Memory};
+const MEMORY_SIZE: usize = 1024;
 
 fn main() {
-    let cache: Cache1 = Cache1::new(1,1);
-    let mut mem: Memory = Memory::new(1028);
-    mem.init();
-
-    println!("{:?}", cache);
-    println!("{:?}", &mem.lines[1]);
+    let mut mem: Memory = Memory::new(MEMORY_SIZE, 0x5A, Endian::BigEndian);
+    println!("{:?}", &mem.read_u8(1).unwrap());
+    let _ = mem.write_u8(1, 32);
+    println!("{:?}", &mem.read_u8(1).unwrap());
     println!("Hello, world!");
 }

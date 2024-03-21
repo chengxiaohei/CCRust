@@ -1,9 +1,5 @@
 use std::vec::Vec;
-
-pub enum Endian {
-    SmallEndian,
-    BigEndian
-}
+use crate::common::Endian;
 
 pub struct Memory {
     data: Vec<u8>,
@@ -127,7 +123,9 @@ impl Memory {
 
 #[cfg(test)]
 mod tests {
-    use crate::memory2::*;
+
+    use super::Memory;
+    use crate::common::Endian;
 
     const TEST_CYCLE: usize = 1000;
     const TEST_MEMORY_SIZE: usize = 1024;

@@ -1,5 +1,6 @@
+
 #[derive(Debug)]
-struct Cache {
+pub struct Cache {
     level: u8,
     size: u32,
 }

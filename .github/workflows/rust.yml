@@ -2,7 +2,7 @@ name: Rust
 
 on:
   push:
-    branches:
+    branches: 
       - 'main'
       - 'releases/**'
   pull_request:
@@ -12,16 +12,29 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
+  RUSTFLAGS: "-Dwarnings"
 
 jobs:
   build-test:
-    name: Build & Test Rust Code
+    name: Build Rust Code
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    
     - name: Build
       run: cargo build --verbose
       
+  test:
+    name: Test Rust Code
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
     - name: Test
       run: cargo test --verbose
+  
+  clippy:
+    name: Clippy Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Clippy
+        run: cargo clippy --all-targets --all-features

@@ -3,19 +3,19 @@ name: Rust
 on:
   push:
     branches:
-	    - 'main'
-	    - 'releases/**'
+      - 'main'
+      - 'releases/**'
   pull_request:
     branches:
-	    - 'main'
-	    - 'releases/**'
+      - 'main'
+      - 'releases/**'
 
 env:
   CARGO_TERM_COLOR: always
 
 jobs:
   build-test:
-	  name: Build & Test Rust Code
+    name: Build & Test Rust Code
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4

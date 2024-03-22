@@ -14,6 +14,7 @@ impl Memory {
         }
     }
 
+    #[allow(unused)]
     pub fn default(size: usize) -> Memory {
         Memory {
             data: vec![0u8; size],
@@ -21,14 +22,17 @@ impl Memory {
         }
     }
 
+    #[allow(unused)]
     pub fn fill(&mut self, val: u8) {
         self.data.fill(val);
     }
 
+    #[allow(unused)]
     pub fn get_size(&self) -> usize {
         self.size
     }
 
+    #[allow(unused)]
     pub fn read_u8(&self, addr: usize) -> Result<u8, ()> {
         if addr >= self.size {
             return Err(())
@@ -36,6 +40,7 @@ impl Memory {
         Ok(self.data[addr])
     }
 
+    #[allow(unused)]
     pub fn read_u16(&self, addr: usize) -> Result<u16, ()> {
         if addr >= self.size - std::mem::size_of::<u16>() + std::mem::size_of::<u8>() {
             return Err(())
@@ -46,6 +51,7 @@ impl Memory {
         Ok(result)
     }
 
+    #[allow(unused)]
     pub fn read_u32(&self, addr: usize) -> Result<u32, ()> {
         if addr >= self.size - std::mem::size_of::<u32>() + std::mem::size_of::<u8>() {
             return Err(())
@@ -58,6 +64,7 @@ impl Memory {
         Ok(result)
     }
 
+    #[allow(unused)]
     pub fn write_u8(&mut self, addr: usize, data: u8) -> Result<(), ()> {
         if addr >= self.size {
             return Err(())
@@ -66,6 +73,7 @@ impl Memory {
         Ok(())
     }
 
+    #[allow(unused)]
     pub fn write_u16(&mut self, addr: usize, data: u16) -> Result<(), ()> {
         if addr >= self.size - std::mem::size_of::<u32>() + std::mem::size_of::<u8>() {
             return Err(())
@@ -75,6 +83,7 @@ impl Memory {
         Ok(())
     }
 
+    #[allow(unused)]
     pub fn write_u32(&mut self, addr: usize, data:u32) -> Result<(), ()> {
         if addr >= self.size - std::mem::size_of::<u32>() + std::mem::size_of::<u8>() {
             return Err(())

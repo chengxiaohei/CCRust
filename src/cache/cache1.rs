@@ -1,28 +1,60 @@
+struct CacheState {
+    modified: bool,
+    exclusived: bool,
+    shared: bool,
+    invalid: bool,
+}
 
-#[derive(Debug)]
+impl Default for CacheState {
+    fn default() -> Self {
+        Self {
+            modified: false,
+            exclusived: false,
+            shared: false,
+            invalid: true,
+        }
+    }
+}
+struct CacheLine {
+    index: usize,
+    state: CacheState,
+    byte_num: usize,
+    bytes: Vec<u8>,
+}
+
+impl CacheLine {
+    fn new(index: usize, state: CacheState, word_num: usize) -> Self {
+        Self {
+            index,
+            state,
+            byte_num: word_num * 4,
+            bytes: vec![0; word_num * 4],
+        }
+    }
+}
+
 pub struct Cache {
-    level: u8,
-    size: u32,
+    line_num: usize,
+    lines: Vec<CacheLine>,
+    total_size: usize
 }
 
 impl Cache {
-    pub fn new(level: u8, size: u32) -> Cache {
-        Cache{level, size}
+    pub fn new(line_num: usize, words_per_line: usize) -> Self {
+        let mut cache: Self = Self {
+            line_num,
+            lines: Vec::with_capacity(line_num),
+            total_size: line_num * words_per_line * 4,
+        };
+        for index in 0..line_num {
+            cache.lines.push(CacheLine::new(index, CacheState::default(), words_per_line));
+        }
+        cache
     }
 }
 
-#[derive(Debug)]
-pub struct Cache1 {
-    cache: Cache,
-    
-}
 
-impl Cache1 {
-    pub fn new(level: u8, size: u32) -> Cache1 {
-        Cache1{cache: Cache::new(level, size)}
-    }
-}
-
-pub struct Cache2 {
+#[cfg(test)]
+mod tests {
 
 }
